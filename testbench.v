@@ -1,18 +1,29 @@
-`timescale 1ns/1ns
+`timescale 1ms/1ms
 
-module testbench ();
-  reg clk,rst, forwarding_EN;
-  MIPS_Processor top_module (clk, rst, forwarding_EN);
+`include "top.v"
 
-  initial begin
-    clk=1;
-    repeat(5000) #50 clk=~clk ;
-  end
+module testbench();
+	reg clk;
+	reg reset;
 
-  initial begin
-    rst = 1;
-    forwarding_EN = 0;
-    #100
-    rst = 0;
-  end
-endmodule // test
+	PikaRISC _PikaRISC(clk, reset);
+
+	initial begin
+		$dumpfile("top.vcd");
+		$dumpvars(-1, _PikaRISC);
+
+		clk = 1;
+		reset = 1;
+
+		// reset
+		#1 reset = 0;
+
+		// clk
+		repeat (20) begin
+			#1 clk = ~clk;
+		end
+
+		$finish;
+	end
+
+endmodule // testbench
