@@ -7,7 +7,7 @@ module fetch(
 	output [31:0] instruction,
 
 	// to instrMem
-	output [21:0] imem_addr,
+	output [31:0] imem_addr,
 	input [31:0] imem_data,
 
 	// to regFile
@@ -30,7 +30,7 @@ module fetch(
 		end
 	end
 
-	assign imem_addr = pc_in[21:0];
+	assign imem_addr = pc_in;
 	assign instruction = {{imem_data[7:0], imem_data[15:8], imem_data[23:16], imem_data[31:24]}}; // to big endian
 
 endmodule // fetch

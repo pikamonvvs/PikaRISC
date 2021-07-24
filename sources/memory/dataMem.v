@@ -5,10 +5,10 @@
 
 module dataMem(
 	input reset,
-	input [31:0] address,
-	input [31:0] dataIn,
-	input writeEnable,
-	output [31:0] dataOut
+	input [31:0] addr,
+	input write_en,
+	input [31:0] data_in,
+	output [31:0] data_out
 	);
 
 	reg [31:0] memory[0:`DMEM_SIZE-1];
@@ -20,13 +20,13 @@ module dataMem(
 				memory[i] <= 0;
 		end
 		else begin
-			if (writeEnable) begin
-				memory[address[`DMEM_BITS-1:0]] <= dataIn;
+			if (write_en) begin
+				memory[addr[`DMEM_BITS-1:0]] <= { data_in[7:0], data_in[15:8], data_in[23:16], data_in[31:24] };
 			end
 		end
 	end
 
-	assign dataOut = memory[address];
+	assign data_out = { memory[addr][7:0], memory[addr][15:8], memory[addr][23:16], memory[addr][31:24] };
 
 endmodule // dataMem
 

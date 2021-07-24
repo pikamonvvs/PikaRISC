@@ -6,7 +6,6 @@
 
 module memory(
 	input [31:0] md_passthrough, // ld, str
-	input [31:0] result, // str
 	input [31:0] rd_val_passthrough, // str
 	output reg [31:0] dmem_val_passthrough, // to writeback // FIXME:
 

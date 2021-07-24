@@ -1,8 +1,8 @@
-top.vcd:	top.vvp
-	gtkwave top.vcd
-top.vvp:	top_tb.v
-	iverilog -I sources/ -o top.vvp top_tb.v
-	vvp top.vvp
+test.vcd:	test.vvp
+	gtkwave test.vcd
+test.vvp:	testbench.v
+	iverilog -I sources/ -o test.vvp testbench.v
+	vvp test.vvp
 
 clean:
 	rm -f *.vvp

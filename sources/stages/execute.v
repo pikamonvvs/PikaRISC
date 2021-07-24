@@ -3,12 +3,16 @@
 
 `include "signExtend.v"
 `include "alu.v"
+`include "comparator.v"
 `include "condChecker.v"
 
 module execute(
 	// fields
 	input [5:0] opcode,
-	input [3:0] rd, rs, rt, cond,
+	input [3:0] rd,
+	input [3:0] rs,
+	input [3:0] rt,
+	input [3:0] cond,
 	input [17:0] imm,
 	input [21:0] md,
 
@@ -24,16 +28,16 @@ module execute(
 
 	// to regFile
 	output [3:0] rd_num, //
-	output [3:0] rs_num,
-	output [3:0] rt_num,
 	input [31:0] rd_val, //
+	output [3:0] rs_num,
 	input [31:0] rs_val,
+	output [3:0] rt_num,
 	input [31:0] rt_val,
 
 	// to alu
 	output [31:0] result,
 	// to comparator
-	output [31:0] cpsr_out,
+	output [31:0] cpsr_passthrough,
 	// to condChecker
 	input [31:0] cpsr_in, // TODO:
 	output taken,
@@ -63,13 +67,13 @@ module execute(
 	assign rd_num = rd;		// need to pass for ld
 	assign val0 = rd_val;	// need to pass for str
 
-	assign cpsr_out = { 28'd0, nzcv };
+	assign cpsr_passthrough = { 28'd0, nzcv };
 
+	// signExtend
 	signExtendImm _signExtendImm(
 		.in(imm),
 		.out(imm32)
 	);
-
 	signExtendMd _signExtendMd(
 		.in(md),
 		.out(md32)

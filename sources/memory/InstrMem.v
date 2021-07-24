@@ -5,7 +5,7 @@
 
 module instrMem(
 	input reset,
-	input [`IMEM_BITS-1:0] addr, // 2MB
+	input [31:0] addr,
 	output [31:0] data_out
 	);
 
@@ -20,7 +20,7 @@ module instrMem(
 		end
 	end
 
-	assign data_out = memory[addr];
+	assign data_out = memory[addr[`IMEM_BITS-1:0]];
 
 endmodule // instrMem
 
