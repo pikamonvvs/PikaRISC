@@ -16,20 +16,20 @@
 `define OP_CALL		6'b100110
 `define OP_RET		6'b100111
 
-`define ALUOP_ADD	5'b00000
-`define ALUOP_SUB	5'b00001
-`define ALUOP_MUL	5'b00010
-`define ALUOP_DIV	5'b00011
-`define ALUOP_AND	5'b00100
-`define ALUOP_OR 	5'b00101
-`define ALUOP_NOT	5'b00110
-`define ALUOP_XOR	5'b00111
-`define ALUOP_SHL	5'b01000
-`define ALUOP_SHR	5'b01001
-`define ALUOP_ASR	5'b01010
-`define ALUOP_MOV	5'b01100
-`define ALUOP_MOVL	5'b01110
-`define ALUOP_MOVH	5'b01111
+`define ALUOP_MOV	5'b00000
+`define ALUOP_MOVL	5'b00010
+`define ALUOP_MOVH	5'b00011
+`define ALUOP_ADD	5'b00100
+`define ALUOP_SUB	5'b00101
+`define ALUOP_MUL	5'b00110
+`define ALUOP_DIV	5'b00111
+`define ALUOP_AND	5'b01000
+`define ALUOP_OR 	5'b01001
+`define ALUOP_NOT	5'b01010
+`define ALUOP_XOR	5'b01011
+`define ALUOP_SHL	5'b01100
+`define ALUOP_SHR	5'b01101
+`define ALUOP_ASR	5'b01110
 
 `define COND_JMP	4'b0000
 `define COND_JEQ	4'b0001
