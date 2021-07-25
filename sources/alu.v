@@ -30,7 +30,7 @@ module alu(
 
 				`ALUOP_SHL:  result <= val1 << val2;
 				`ALUOP_SHR:  result <= val1 >> val2;
-				`ALUOP_ASR:  result <= val1 >> val2; // TODO: algorithm
+				`ALUOP_ASR:  result <= val1 >>> val2;
 
 				default: result <= 0;
 			endcase
