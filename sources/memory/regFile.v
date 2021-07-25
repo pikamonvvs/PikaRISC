@@ -43,6 +43,14 @@ module regFile(
 
 	integer i;
 
+	// initial
+	initial begin
+		for (i = 0; i < 16; i = i + 1)
+			regs[i] <= 0;
+		pc <= 0;
+		cpsr <= 0;
+	end
+
 	// reset
 	always @ (*) begin
 		if (!reset) begin

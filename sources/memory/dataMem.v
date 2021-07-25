@@ -14,6 +14,11 @@ module dataMem(
 	reg [31:0] memory[0:`DMEM_SIZE-1];
 	integer i;
 
+	initial begin
+		for (i = 0; i < `DMEM_SIZE; i = i + 1)
+			memory[i] <= 0;
+	end
+
 	always @ (*) begin
 		if (!reset) begin
 			for (i = 0; i < `DMEM_SIZE; i = i + 1)
