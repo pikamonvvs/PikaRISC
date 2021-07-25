@@ -25,7 +25,7 @@ module alu(
 
 				`ALUOP_AND:  result <= val1 & val2;
 				`ALUOP_OR :  result <= val1 | val2;
-				`ALUOP_NOT:  result <= !val2; // TODO: rr ri
+				`ALUOP_NOT:  result <= !val1;
 				`ALUOP_XOR:  result <= val1 ^ val2;
 
 				`ALUOP_SHL:  result <= val1 << val2;

@@ -83,6 +83,7 @@ module PikaRISC(
 	wire [17:0] imm;
 	wire [21:0] md;
 	wire is_alu_op;
+	wire is_not_op;
 	wire is_cmp_op;
 	wire is_jmp_op;
 	wire is_ld_op;
@@ -101,6 +102,7 @@ module PikaRISC(
 		.imm(imm),
 		.md(md),
 		.is_alu_op(is_alu_op),
+		.is_not_op(is_not_op),
 		.is_cmp_op(is_cmp_op),
 		.is_jmp_op(is_jmp_op),
 		.is_ld_op(is_ld_op),
@@ -130,6 +132,7 @@ module PikaRISC(
 		.imm(imm),
 		.md(md),
 		.is_alu_op(is_alu_op),
+		.is_not_op(is_not_op),
 		.is_cmp_op(is_cmp_op),
 		.is_jmp_op(is_jmp_op),
 		.is_ld_op(is_ld_op),

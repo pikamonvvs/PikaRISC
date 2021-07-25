@@ -18,6 +18,7 @@ module execute(
 
 	// flags
 	input is_alu_op,
+	input is_not_op,
 	input is_cmp_op,
 	input is_jmp_op,
 	input is_ld_op,
@@ -61,7 +62,8 @@ module execute(
 	// TODO: postition of operand differ according to instruction
 	assign rs_num = rs;
 	assign rt_num = (!is_src2_imm) ? rt_num : 0;
-	assign val1 = rs_val;
+//	assign val1 = rs_val;
+	assign val1 = (is_not_op && is_src2_imm) ? imm32 : rs_val; // not is an unary operator
 	assign val2 = (!is_src2_imm) ? rt_val : imm32;
 
 	assign rd_num = rd;		// need to pass for ld

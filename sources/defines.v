@@ -8,9 +8,9 @@
 `define DMEM_BITS	22
 
 `define OP_ALU		6'b0xxxxx
+`define OP_NOT		6'b00110x
 `define OP_CMP		6'b100000
-`define OP_JMP		6'b100010
-`define OP_JCC		6'b100011
+`define OP_JMP		6'b10001x
 `define OP_LD		6'b100100
 `define OP_STR		6'b100101
 `define OP_CALL		6'b100110
