@@ -8,15 +8,16 @@ module comparator(
 	output [3:0] nzcv
 	);
 
-	reg [31:0] diff;
-	reg n, z, c, v; // TODO: solutions to get
+	wire [32:0] diff;
+	wire overflow, underflow;
 
-	always @ (*) begin
-		if (is_cmp_op) begin
-			diff <= val1 - val2; // TODO
-		end
-	end
-
+	assign diff = (is_cmp_op) ? { val1[31], val1 } - { val2[31], val2 } : 32'd0;
+	assign n = diff[31];
+	assign z = (diff == 0) ? 1'b1 : 1'b0;
+	assign c = diff[32];
+	assign v = overflow | underflow;
+	assign overflow  = (diff[32:31] == 2'b01) ? 1'b1 : 1'b0;
+	assign underflow = (diff[32:31] == 2'b10) ? 1'b1 : 1'b0;
 	assign nzcv = { n, z, c, v };
 
 endmodule // comparator
