@@ -16,13 +16,13 @@ module testbench();
 	wire [31:0] dmem_val_in;
 
 `ifdef FOR_TEST
-	reg [31:0] buffer[0:255]; //
+	reg [31:0] buffer[0:255];
 	wire [31:0] test_imem_addr;
 	wire [31:0] test_imem_data_in;
 	wire [31:0] test_imem_data_out;
 	reg [31:0] test_imem_addr_reg;
 	reg [31:0] test_imem_data_in_reg;
-	integer i;
+	integer i = 0;
 `endif
 
 	PikaRISC _PikaRISC(
@@ -66,36 +66,40 @@ module testbench();
 		// for gtkwave
 		$dumpfile("test.vcd");
 		$dumpvars(-1, _PikaRISC);
-		$dumpvars(-1, _instrMem);
-		$dumpvars(-1, _dataMem);
+//		$dumpvars(-1, _instrMem);
+//		$dumpvars(-1, _dataMem);
+
+		// initialize
+		clk = 0;
+		reset = 1;
+//		imem_addr = 0;
+//		dmem_addr = 0;
+//		dmem_write_en = 0;
+//		dmem_val_out = 0;
+
+		// reset
+		#1 reset = 0;
 
 `ifdef FOR_TEST
-		// read hex file
-		$readmemh("test.hex", buffer);
-		for(i = 0; i < 256; i = i + 1) begin
-			test_imem_addr_reg = i;
-			test_imem_data_in_reg = buffer[i];
-		end
-
-		// check
+		// test probe
 		$dumpvars(-1, test_imem_addr);
+		$dumpvars(-1, test_imem_data_in);
 		$dumpvars(-1, test_imem_data_out);
-		i = 0;
-		repeat (45) begin
-			#1 test_imem_addr_reg = i; i = i + 1;
+
+		// code injection
+		$readmemh("test.hex", buffer);
+		for (i = 0; i < 256; i = i + 1) begin
+			#1 test_imem_addr_reg = i;
+			test_imem_data_in_reg = buffer[i];
 		end
 `endif
 
-		// initialize
-		#1 reset = 1;
-		#1 reset = 0; clk = 1;
-
-		// clk
-		repeat (20) begin
+		// start clock trigger
+		repeat (44) begin
 			#1 clk = ~clk;
 		end
 
 		$finish;
 	end
 
-endmodule // testbench
+endmodule
