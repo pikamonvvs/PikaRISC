@@ -79,6 +79,7 @@ module testbench();
 
 		// reset
 		#1 reset = 0;
+		#1 reset = 1;
 
 `ifdef FOR_TEST
 		// test probe
