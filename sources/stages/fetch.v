@@ -14,8 +14,9 @@ module fetch(
 	input [31:0] pc_in,
 	output reg [31:0] pc_out, // FIXME:
 
-	//to execute
-	input taken
+	// from execute
+	input taken,
+	input [31:0] pc_rel
 	);
 
 	always @ (posedge clk or negedge reset) begin
@@ -25,8 +26,10 @@ module fetch(
 		end
 		else
 		begin
-			if (!taken)
-				pc_out <= pc_in + 4;
+			if (taken)
+				pc_out <= pc_in + pc_rel;
+			else
+				pc_out <= pc_in + 1;
 		end
 	end
 

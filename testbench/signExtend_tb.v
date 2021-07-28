@@ -7,6 +7,7 @@ module signExtend_tb();
 	wire [31:0] out1;
 	reg [21:0] in2;
 	wire [31:0] out2;
+
 	integer i = 0;
 
 	signExtendImm _signExtendImm(

@@ -4,10 +4,12 @@
 
 module dataMem_tb();
 	reg reset;
+
 	reg [31:0] addr;
 	reg [31:0] data_in;
 	reg write_en;
 	wire [31:0] data_out;
+
 	integer i = 0;
 
 	dataMem _dataMem(

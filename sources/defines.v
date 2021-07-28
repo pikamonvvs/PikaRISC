@@ -7,10 +7,10 @@
 `define DMEM_SIZE	256 // maximum 131072
 `define DMEM_BITS	22
 
-`define OP_ALU		6'b0xxxxx
-`define OP_NOT		6'b00110x
+`define OP_ALU		1'b0
+`define OP_NOT		5'b01010
 `define OP_CMP		6'b100000
-`define OP_JMP		6'b10001x
+`define OP_JMP		5'b10001
 `define OP_LD		6'b100100
 `define OP_STR		6'b100101
 `define OP_CALL		6'b100110

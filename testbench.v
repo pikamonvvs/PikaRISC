@@ -66,16 +66,12 @@ module testbench();
 		// for gtkwave
 		$dumpfile("test.vcd");
 		$dumpvars(-1, _PikaRISC);
-//		$dumpvars(-1, _instrMem);
-//		$dumpvars(-1, _dataMem);
+		$dumpvars(-1, _instrMem);
+		$dumpvars(-1, _dataMem);
 
 		// initialize
 		clk = 0;
 		reset = 1;
-//		imem_addr = 0;
-//		dmem_addr = 0;
-//		dmem_write_en = 0;
-//		dmem_val_out = 0;
 
 		// reset
 		#1 reset = 0;
@@ -83,9 +79,9 @@ module testbench();
 
 `ifdef FOR_TEST
 		// test probe
-		$dumpvars(-1, test_imem_addr);
-		$dumpvars(-1, test_imem_data_in);
-		$dumpvars(-1, test_imem_data_out);
+//		$dumpvars(-1, test_imem_addr);
+//		$dumpvars(-1, test_imem_data_in);
+//		$dumpvars(-1, test_imem_data_out);
 
 		// code injection
 		$readmemh("test.hex", buffer);
@@ -100,7 +96,7 @@ module testbench();
 			#1 clk = ~clk;
 		end
 
-		$finish;
+		#1 $finish;
 	end
 
 endmodule

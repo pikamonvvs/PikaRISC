@@ -1,9 +1,7 @@
 `timescale 1ms/1ms
 
-`include "alu.v"
-`include "defines.v"
-//`include "../sources/alu.v"
-//`include "../sources/defines.v"
+`include "../sources/alu.v"
+`include "../sources/defines.v"
 
 module alu_tb();
 	reg [31:0] val1;

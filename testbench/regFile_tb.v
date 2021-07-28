@@ -4,6 +4,7 @@
 
 module regFile_tb();
 	reg reset;
+
 	reg [31:0] if_pc_in;
 	wire [31:0] if_pc_out;
 	reg [3:0] exe_rd_num;
@@ -16,10 +17,9 @@ module regFile_tb();
 	reg [3:0] wb_rd_num;
 	reg wb_rd_write_en;
 	reg [31:0] wb_rd_in;
-	reg wb_pc_write_en;
-	reg [31:0] wb_pc_in;
 	reg wb_cpsr_write_en;
 	reg [31:0] wb_cpsr_in;
+
 	integer i = 0;
 
 	regFile _regFile(
@@ -43,9 +43,6 @@ module regFile_tb();
 		.wb_rd_write_en(wb_rd_write_en),
 		.wb_rd_in(wb_rd_in),
 
-		.wb_pc_write_en(wb_pc_write_en),
-		.wb_pc_in(wb_pc_in),
-
 		.wb_cpsr_write_en(wb_cpsr_write_en),
 		.wb_cpsr_in(wb_cpsr_in)
 	);
@@ -63,8 +60,6 @@ module regFile_tb();
 		wb_rd_num = 0;
 		wb_rd_write_en = 0;
 		wb_rd_in = 0;
-		wb_pc_write_en = 0;
-		wb_pc_in = 0;
 		wb_cpsr_write_en = 0;
 		wb_cpsr_in = 0;
 
@@ -72,11 +67,9 @@ module regFile_tb();
 		#1 reset = 0;
 		#1 reset = 1;
 
-		// wb pc write
 		// if pc read
-		wb_pc_write_en = 1;
 		for (i = 0; i < 44; i = i + 1) begin
-			#1 wb_pc_in <= i; // if_pc_out
+			#1 if_pc_in <= i; // if_pc_out
 		end
 
 		// wb cpsr write

@@ -4,14 +4,16 @@
 
 module instrMem_tb();
 	reg reset;
+
 	reg [31:0] addr;
 	wire [31:0] data_out;
-	integer i = 0;
 `ifdef FOR_TEST
 	reg [31:0] test_imem_addr;
 	reg [31:0] test_imem_data_in;
 	wire [31:0] test_imem_data_out;
 `endif
+
+	integer i = 0;
 
 	instrMem _instrMem(
 		.reset(reset),

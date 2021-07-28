@@ -7,11 +7,9 @@ module writeback(
 	input [31:0] result, // alu
 	input [31:0] cpsr_passthrough,
 	input [31:0] dmem_val_passthrough, // to writeback
-	input taken,
 
 	input is_alu_op_passthrough,
 	input is_cmp_op_passthrough,
-	input is_jmp_op_passthrough,
 	input is_ld_op_passthrough,
 
 	// to regFile
@@ -19,9 +17,6 @@ module writeback(
 	output reg [3:0] rd_num, // TODO: data memory size
 	output reg rd_write_en, // TODO: it is thought not needed
 	output reg [31:0] rd_val,
-	// pc
-	output reg pc_write_en, // TODO: it is thought not needed
-	output reg [31:0] pc_out,
 	// cpsr
 	output reg cpsr_write_en, // TODO: it is thought not needed
 	output reg [31:0] cpsr_out
@@ -35,23 +30,13 @@ module writeback(
 			rd_val <= result;
 			rd_write_en <= 1'b1;
 			cpsr_write_en <= 1'b0; // TODO: preventing but necessity
-			pc_write_en <= 1'b0; // TODO: preventing but necessity
 		end
 		// compare
 		if (is_cmp_op_passthrough) begin
 			// write nzcv to cpsr
 			cpsr_out <= cpsr_passthrough;
 			cpsr_write_en <= 1'b1;
-			pc_write_en <= 1'b0; // TODO: preventing but necessity
 			rd_write_en <= 1'b0; // TODO: preventing but necessity
-		end
-		// branch
-		if (is_jmp_op_passthrough && taken) begin
-			// write md to pc
-			pc_out <= md_passthrough;
-			pc_write_en <= 1'b1;
-			rd_write_en <= 1'b0; // TODO: preventing but necessity
-			cpsr_write_en <= 1'b0; // TODO: preventing but necessity
 		end
 		// load
 		if (is_ld_op_passthrough) begin
@@ -60,7 +45,6 @@ module writeback(
 			rd_val <= dmem_val_passthrough;
 			rd_write_en <= 1'b1;
 			cpsr_write_en <= 1'b0; // TODO: preventing but necessity
-			pc_write_en <= 1'b0; // TODO: preventing but necessity
 		end
 	end
 

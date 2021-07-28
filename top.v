@@ -37,8 +37,6 @@ module PikaRISC(
 	wire [3:0] wb_rd_num;
 	wire wb_rd_write_en;
 	wire [31:0] wb_rd_in;
-	wire wb_pc_write_en;
-	wire [31:0] wb_pc_in;
 	wire wb_cpsr_write_en;
 	wire [31:0] wb_cpsr_in;
 
@@ -56,8 +54,6 @@ module PikaRISC(
 		.wb_rd_num(wb_rd_num),
 		.wb_rd_write_en(wb_rd_write_en),
 		.wb_rd_in(wb_rd_in),
-		.wb_pc_write_en(wb_pc_write_en),
-		.wb_pc_in(wb_pc_in),
 		.wb_cpsr_write_en(wb_cpsr_write_en),
 		.wb_cpsr_in(wb_cpsr_in)
 	);
@@ -65,6 +61,7 @@ module PikaRISC(
 	// stages
 	wire [31:0] instruction;
 	wire taken;
+	wire [31:0] pc_rel;
 
 	fetch _fetch(
 		.instruction(instruction),
@@ -72,7 +69,8 @@ module PikaRISC(
 		.imem_data(imem_data),	//
 		.pc_in(if_pc_out),		//
 		.pc_out(if_pc_in),		//
-		.taken(taken)
+		.taken(taken),
+		.pc_rel(pc_rel)
 	);
 
 	wire [5:0] opcode;
@@ -119,7 +117,6 @@ module PikaRISC(
 	wire [31:0] md_passthrough;
 	wire is_alu_op_passthrough;
 	wire is_cmp_op_passthrough;
-	wire is_jmp_op_passthrough;
 	wire is_ld_op_passthrough;
 	wire is_str_op_passthrough;
 
@@ -150,12 +147,12 @@ module PikaRISC(
 		.cpsr_passthrough(cpsr_passthrough),
 		.cpsr_in(exe_cpsr_out),					//
 		.taken(taken),
+		.pc_rel(pc_rel),
 		.rd_num_passthrough(rd_num_passthrough),
 		.rd_val_passthrough(rd_val_passthrough),
 		.md_passthrough(md_passthrough),
 		.is_alu_op_passthrough(is_alu_op_passthrough),
 		.is_cmp_op_passthrough(is_cmp_op_passthrough),
-		.is_jmp_op_passthrough(is_jmp_op_passthrough),
 		.is_ld_op_passthrough(is_ld_op_passthrough),
 		.is_str_op_passthrough(is_str_op_passthrough)
 	);
@@ -180,16 +177,12 @@ module PikaRISC(
 		.result(result),
 		.cpsr_passthrough(cpsr_passthrough),
 		.dmem_val_passthrough(dmem_val_passthrough),
-		.taken(taken),
 		.is_alu_op_passthrough(is_alu_op_passthrough),
 		.is_cmp_op_passthrough(is_cmp_op_passthrough),
-		.is_jmp_op_passthrough(is_jmp_op_passthrough),
 		.is_ld_op_passthrough(is_ld_op_passthrough),
 		.rd_num(wb_rd_num),					//
 		.rd_write_en(wb_rd_write_en),		//
 		.rd_val(wb_rd_in),					//
-		.pc_write_en(wb_pc_write_en),		//
-		.pc_out(wb_pc_in),					//
 		.cpsr_write_en(wb_cpsr_write_en),	//
 		.cpsr_out(wb_cpsr_in)				//
 	);

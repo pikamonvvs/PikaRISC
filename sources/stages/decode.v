@@ -35,10 +35,10 @@ module decode(
 	assign imm = instruction[17:0];
 	assign md = instruction[21:0];
 
-	assign is_alu_op = (instruction[31:26] == `OP_ALU) ? 1'b1 : 1'b0;
-	assign is_not_op = (instruction[31:26] == `OP_NOT) ? 1'b1 : 1'b0;
+	assign is_alu_op = (instruction[31] == 1'b0) ? 1'b1 : 1'b0;
+	assign is_not_op = (instruction[31:27] == `OP_NOT) ? 1'b1 : 1'b0;
 	assign is_cmp_op = (instruction[31:26] == `OP_CMP) ? 1'b1 : 1'b0;
-	assign is_jmp_op = (instruction[31:26] == `OP_JMP) ? 1'b1 : 1'b0;
+	assign is_jmp_op = (instruction[31:27] == 5'b10001) ? 1'b1 : 1'b0;
 	assign is_ld_op = (instruction[31:26] == `OP_LD) ? 1'b1 : 1'b0;
 	assign is_str_op = (instruction[31:26] == `OP_STR) ? 1'b1 : 1'b0;
 	assign is_call_op = (instruction[31:26] == `OP_CALL) ? 1'b1 : 1'b0;

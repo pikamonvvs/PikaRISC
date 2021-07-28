@@ -28,13 +28,15 @@ module regFile(
 	input wb_rd_write_en,
 	input [31:0] wb_rd_in,
 
-	// writeback - pc(w)
-	input wb_pc_write_en,
-	input [31:0] wb_pc_in,
-
 	// writeback - cpsr(w)
 	input wb_cpsr_write_en,
 	input [31:0] wb_cpsr_in
+
+`ifdef FOR_TEST
+	,
+	output [31:0] wb_rd_out,
+	output [31:0] wb_cpsr_out
+`endif
 	);
 
 	// registers
@@ -74,15 +76,17 @@ module regFile(
 	assign exe_rt_data_out = regs[exe_rt_num];
 	assign exe_cpsr_out = cpsr;
 
-	// writeback - rd(w), pc(w), cpsr(w)
+	// writeback - rd(w), cpsr(w)
 	always @ (*) begin
 		if (wb_rd_write_en)
 			regs[wb_rd_num] <= wb_rd_in;
-		if (wb_pc_write_en)
-			pc <= wb_pc_in;
 		if (wb_cpsr_write_en)
 			cpsr <= wb_cpsr_in;
 	end
+`ifdef FOR_TEST
+	assign wb_rd_out = regs[wb_rd_num];
+	assign wb_cpsr_out = cpsr;
+`endif
 
 endmodule // regFile
 

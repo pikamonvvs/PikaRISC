@@ -42,6 +42,7 @@ module execute(
 	// to condChecker
 	input [31:0] cpsr_in, // TODO:
 	output taken,
+	output [31:0] pc_rel,
 
 	// pass-through
 	output [3:0] rd_num_passthrough, // alu
@@ -49,19 +50,18 @@ module execute(
 	output [31:0] md_passthrough,
 	output is_alu_op_passthrough,
 	output is_cmp_op_passthrough,
-	output is_jmp_op_passthrough,
 	output is_ld_op_passthrough,
 	output is_str_op_passthrough
 	);
 
-	wire [31:0] val1, val2;
+	wire [31:0] val0, val1, val2;
 	wire [31:0] imm32;
 	wire [31:0] md32;
 	wire [3:0] nzcv;
 
 	// TODO: postition of operand differ according to instruction
 	assign rs_num = rs;
-	assign rt_num = (!is_src2_imm) ? rt_num : 0;
+	assign rt_num = (!is_src2_imm) ? rt : 0;
 //	assign val1 = rs_val;
 	assign val1 = (is_not_op && is_src2_imm) ? imm32 : rs_val; // not is an unary operator
 	assign val2 = (!is_src2_imm) ? rt_val : imm32;
@@ -112,9 +112,9 @@ module execute(
 	assign rd_num_passthrough = rd;
 	assign rd_val_passthrough = val0;
 	assign md_passthrough = md32;
+	assign pc_rel = md32;
 	assign is_alu_op_passthrough = is_alu_op;
 	assign is_cmp_op_passthrough = is_cmp_op;
-	assign is_jmp_op_passthrough = is_jmp_op;
 	assign is_ld_op_passthrough = is_ld_op;
 	assign is_str_op_passthrough = is_str_op;
 
