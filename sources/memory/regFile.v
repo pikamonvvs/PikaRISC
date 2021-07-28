@@ -39,7 +39,8 @@ module regFile(
 
 	// registers
 	reg [31:0] regs[0:15];
-	reg pc, cpsr;
+	reg [31:0] pc;
+	reg [31:0] cpsr;
 
 	integer i;
 
