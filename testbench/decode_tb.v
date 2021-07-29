@@ -10,7 +10,7 @@ module decode_tb();
 	wire [3:0] rt;
 	wire [3:0] cond;
 	wire [17:0] imm;
-	wire [21:0] md;
+	wire [21:0] mem;
 	wire is_alu_op;
 	wire is_not_op;
 	wire is_cmp_op;
@@ -31,7 +31,7 @@ module decode_tb();
 		.rt(rt),
 		.cond(cond),
 		.imm(imm),
-		.md(md),
+		.mem(mem),
 		.is_alu_op(is_alu_op),
 		.is_not_op(is_not_op),
 		.is_cmp_op(is_cmp_op),

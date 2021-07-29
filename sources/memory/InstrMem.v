@@ -1,7 +1,7 @@
 `ifndef __INSTRMEM_V__
 `define __INSTRMEM_V__
 
-`include "../defines.v"
+`include "defines.v"
 
 module instrMem(
 	input reset,

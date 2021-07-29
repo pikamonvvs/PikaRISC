@@ -1,11 +1,11 @@
 `ifndef __MEMORY_V__
 `define __MEMORY_V__
 
-// ld : mem(md) -> wb(rd_num_passthrough)
-// str: exe(rd_val_passthrough) -> mem(md32)
+// ld : mem(mem) -> wb(rd_num_passthrough)
+// str: exe(rd_val_passthrough) -> mem(mem32)
 
 module memory(
-	input [31:0] md_passthrough, // ld, str
+	input [31:0] mem_passthrough, // ld, str
 	input [31:0] rd_val_passthrough, // str
 	output reg [31:0] dmem_val_passthrough, // to writeback // FIXME:
 
@@ -21,12 +21,12 @@ module memory(
 
 	always @ (*) begin
 		if (is_ld_op_passthrough) begin
-			dmem_addr <= md_passthrough;
+			dmem_addr <= mem_passthrough;
 			dmem_write_en <= 1'b0;
 			dmem_val_passthrough <= dmem_val_in; // TODO: need to test if it is correct
 		end
 		if (is_str_op_passthrough) begin
-			dmem_addr <= md_passthrough;
+			dmem_addr <= mem_passthrough;
 			dmem_val_out <= rd_val_passthrough;
 			dmem_write_en <= 1'b1;
 		end

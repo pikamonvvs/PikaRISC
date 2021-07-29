@@ -79,7 +79,7 @@ module PikaRISC(
 	wire [3:0] rt;
 	wire [3:0] cond;
 	wire [17:0] imm;
-	wire [21:0] md;
+	wire [21:0] mem;
 	wire is_alu_op;
 	wire is_not_op;
 	wire is_cmp_op;
@@ -98,7 +98,7 @@ module PikaRISC(
 		.rt(rt),
 		.cond(cond),
 		.imm(imm),
-		.md(md),
+		.mem(mem),
 		.is_alu_op(is_alu_op),
 		.is_not_op(is_not_op),
 		.is_cmp_op(is_cmp_op),
@@ -114,7 +114,7 @@ module PikaRISC(
 	wire [31:0] cpsr_passthrough;
 	wire [3:0] rd_num_passthrough;
 	wire [31:0] rd_val_passthrough;
-	wire [31:0] md_passthrough;
+	wire [31:0] mem_passthrough;
 	wire is_alu_op_passthrough;
 	wire is_cmp_op_passthrough;
 	wire is_ld_op_passthrough;
@@ -127,7 +127,7 @@ module PikaRISC(
 		.rt(rt),
 		.cond(cond),
 		.imm(imm),
-		.md(md),
+		.mem(mem),
 		.is_alu_op(is_alu_op),
 		.is_not_op(is_not_op),
 		.is_cmp_op(is_cmp_op),
@@ -150,7 +150,7 @@ module PikaRISC(
 		.pc_rel(pc_rel),
 		.rd_num_passthrough(rd_num_passthrough),
 		.rd_val_passthrough(rd_val_passthrough),
-		.md_passthrough(md_passthrough),
+		.mem_passthrough(mem_passthrough),
 		.is_alu_op_passthrough(is_alu_op_passthrough),
 		.is_cmp_op_passthrough(is_cmp_op_passthrough),
 		.is_ld_op_passthrough(is_ld_op_passthrough),
@@ -160,7 +160,7 @@ module PikaRISC(
 	wire reg [31:0] dmem_val_passthrough;
 
 	memory _memory(
-		.md_passthrough(md_passthrough),
+		.mem_passthrough(mem_passthrough),
 		.rd_val_passthrough(rd_val_passthrough),
 		.dmem_val_passthrough(dmem_val_passthrough),
 		.is_ld_op_passthrough(is_ld_op_passthrough),
@@ -173,7 +173,7 @@ module PikaRISC(
 
 	writeback _writeback(
 		.rd_num_passthrough(rd_num_passthrough),
-		.md_passthrough(md_passthrough),
+		.mem_passthrough(mem_passthrough),
 		.result(result),
 		.cpsr_passthrough(cpsr_passthrough),
 		.dmem_val_passthrough(dmem_val_passthrough),

@@ -13,7 +13,7 @@ module decode(
 	output [3:0] rt,
 	output [3:0] cond,
 	output [17:0] imm,
-	output [21:0] md,
+	output [21:0] mem,
 
 	// flags
 	output is_alu_op,
@@ -33,7 +33,7 @@ module decode(
 	assign rt = instruction[17:14];
 	assign cond = instruction[25:22];
 	assign imm = instruction[17:0];
-	assign md = instruction[21:0];
+	assign mem = instruction[21:0];
 
 	assign is_alu_op = (instruction[31] == 1'b0) ? 1'b1 : 1'b0;
 	assign is_not_op = (instruction[31:27] == `OP_NOT) ? 1'b1 : 1'b0;

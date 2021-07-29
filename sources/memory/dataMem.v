@@ -1,7 +1,7 @@
 `ifndef __DATAMEM_V__
 `define __DATAMEM_V__
 
-`include "../defines.v"
+`include "defines.v"
 
 module dataMem(
 	input reset,

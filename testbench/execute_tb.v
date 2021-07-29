@@ -13,7 +13,7 @@ module execute_tb();
 	reg [3:0] rt;
 	reg [3:0] cond;
 	reg [17:0] imm;
-	reg [21:0] md;
+	reg [21:0] mem;
 	reg is_alu_op;
 	reg is_not_op;
 	reg is_cmp_op;
@@ -31,7 +31,7 @@ module execute_tb();
 	wire [31:0] pc_rel;
 	wire [3:0] rd_num_passthrough;
 	wire [31:0] rd_val_passthrough;
-	wire [31:0] md_passthrough;
+	wire [31:0] mem_passthrough;
 	wire is_alu_op_passthrough;
 	wire is_cmp_op_passthrough;
 	wire is_ld_op_passthrough;
@@ -66,7 +66,7 @@ module execute_tb();
 		.rt(rt),
 		.cond(cond),
 		.imm(imm),
-		.md(md),
+		.mem(mem),
 		.is_alu_op(is_alu_op),
 		.is_not_op(is_not_op),
 		.is_cmp_op(is_cmp_op),
@@ -93,7 +93,7 @@ module execute_tb();
 		.pc_rel(pc_rel),
 		.rd_num_passthrough(rd_num_passthrough),
 		.rd_val_passthrough(rd_val_passthrough),
-		.md_passthrough(md_passthrough),
+		.mem_passthrough(mem_passthrough),
 		.is_alu_op_passthrough(is_alu_op_passthrough),
 		.is_cmp_op_passthrough(is_cmp_op_passthrough),
 		.is_ld_op_passthrough(is_ld_op_passthrough),
@@ -137,7 +137,7 @@ module execute_tb();
 		rt = 0;
 		cond = 0;
 		imm = 0;
-		md = 0;
+		mem = 0;
 		is_alu_op = 0;
 		is_not_op = 0;
 		is_cmp_op = 0;
@@ -166,7 +166,7 @@ module execute_tb();
 		rt <= 4'd3;
 		cond <= 4'd0;
 		imm <= 18'd0;
-		md <= 22'd0;
+		mem <= 22'd0;
 		is_alu_op <= 1'b1;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b0;
@@ -187,7 +187,7 @@ module execute_tb();
 		rt <= 4'd0;
 		cond <= 4'd0;
 		imm <= 18'd0;
-		md <= 22'd0;
+		mem <= 22'd0;
 		is_alu_op <= 1'b1;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b0;
@@ -208,7 +208,7 @@ module execute_tb();
 		rt <= 4'd0;
 		cond <= 4'd0;
 		imm <= 18'd7;
-		md <= 22'd0;
+		mem <= 22'd0;
 		is_alu_op <= 1'b1;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b0;
@@ -229,7 +229,7 @@ module execute_tb();
 		rt <= 4'd0;
 		cond <= 4'd0;
 		imm <= 18'd9;
-		md <= 22'd0;
+		mem <= 22'd0;
 		is_alu_op <= 1'b1;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b0;
@@ -250,7 +250,7 @@ module execute_tb();
 		rt <= 4'd0;
 		cond <= 4'd0;
 		imm <= 18'd0;
-		md <= 22'd0;
+		mem <= 22'd0;
 		is_alu_op <= 1'b1;
 		is_not_op <= 1'b1;
 		is_cmp_op <= 1'b0;
@@ -271,7 +271,7 @@ module execute_tb();
 		rt <= 4'd0;
 		cond <= 4'd0;
 		imm <= 18'd1;
-		md <= 22'd0;
+		mem <= 22'd0;
 		is_alu_op <= 1'b1;
 		is_not_op <= 1'b1;
 		is_cmp_op <= 1'b0;
@@ -292,7 +292,7 @@ module execute_tb();
 		rt <= 4'd3;
 		cond <= 4'd0;
 		imm <= 18'd0;
-		md <= 22'd0;
+		mem <= 22'd0;
 		is_alu_op <= 1'b0;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b1;
@@ -313,7 +313,7 @@ module execute_tb();
 		rt <= 4'd0;
 		cond <= 4'd0;
 		imm <= 18'd5;
-		md <= 22'd0;
+		mem <= 22'd0;
 		is_alu_op <= 1'b0;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b1;
@@ -334,7 +334,7 @@ module execute_tb();
 		rt <= 4'd0;
 		cond <= 4'b0000;
 		imm <= 18'd0;
-		md <= 22'd6;
+		mem <= 22'd6;
 		is_alu_op <= 1'b0;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b0;
@@ -355,7 +355,7 @@ module execute_tb();
 		rt <= 4'd0;
 		cond <= 4'b0001;
 		imm <= 18'd0;
-		md <= 22'd7;
+		mem <= 22'd7;
 		is_alu_op <= 1'b0;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b0;
@@ -376,7 +376,7 @@ module execute_tb();
 		rt <= 4'd0;
 		cond <= 4'b0010;
 		imm <= 18'd0;
-		md <= 22'd7;
+		mem <= 22'd7;
 		is_alu_op <= 1'b0;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b0;
@@ -397,7 +397,7 @@ module execute_tb();
 		rt <= 4'd0;
 		cond <= 4'b0011;
 		imm <= 18'd0;
-		md <= 22'd7;
+		mem <= 22'd7;
 		is_alu_op <= 1'b0;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b0;
@@ -418,7 +418,7 @@ module execute_tb();
 		rt <= 4'd0;
 		cond <= 4'b0100;
 		imm <= 18'd0;
-		md <= 22'd7;
+		mem <= 22'd7;
 		is_alu_op <= 1'b0;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b0;
@@ -439,7 +439,7 @@ module execute_tb();
 		rt <= 4'd0;
 		cond <= 4'b0101;
 		imm <= 18'd0;
-		md <= 22'd7;
+		mem <= 22'd7;
 		is_alu_op <= 1'b0;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b0;
@@ -460,7 +460,7 @@ module execute_tb();
 		rt <= 4'd0;
 		cond <= 4'b0110;
 		imm <= 18'd0;
-		md <= 22'd7;
+		mem <= 22'd7;
 		is_alu_op <= 1'b0;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b0;
@@ -475,13 +475,13 @@ module execute_tb();
 		#1 reset = 1;
 
 		// LD, r8, 9
-		opcode <= 6'b100100; // is_str_op_passthrough = 1, rd_num_passthrough = 8, md_passthrough = 9
+		opcode <= 6'b100100; // is_str_op_passthrough = 1, rd_num_passthrough = 8, mem_passthrough = 9
 		rd <= 4'd8;
 		rs <= 4'd0;
 		rt <= 4'd0;
 		cond <= 4'd0;
 		imm <= 18'd0;
-		md <= 22'd9;
+		mem <= 22'd9;
 		is_alu_op <= 1'b0;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b0;
@@ -496,13 +496,13 @@ module execute_tb();
 		#1 reset = 1;
 
 		// STR, r10, 11
-		opcode <= 6'b100101; // is_str_op_passthrough = 1, rd_val_passthrough = 0, md_passthrough = 11
+		opcode <= 6'b100101; // is_str_op_passthrough = 1, rd_val_passthrough = 0, mem_passthrough = 11
 		rd <= 4'd10;
 		rs <= 4'd0;
 		rt <= 4'd0;
 		cond <= 4'd0;
 		imm <= 18'd0;
-		md <= 22'd11;
+		mem <= 22'd11;
 		is_alu_op <= 1'b0;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b0;
@@ -523,7 +523,7 @@ module execute_tb();
 		rt <= 4'd0;
 		cond <= 4'd0;
 		imm <= 18'd0;
-		md <= 22'd0;
+		mem <= 22'd0;
 		is_alu_op <= 1'b0;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b0;
@@ -544,7 +544,7 @@ module execute_tb();
 		rt <= 4'd0;
 		cond <= 4'd0;
 		imm <= 18'd0;
-		md <= 22'd0;
+		mem <= 22'd0;
 		is_alu_op <= 1'b0;
 		is_not_op <= 1'b0;
 		is_cmp_op <= 1'b0;

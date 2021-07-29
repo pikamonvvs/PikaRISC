@@ -8,7 +8,7 @@ module memory_tb();
 
 	reg is_ld_op_passthrough;
 	reg is_str_op_passthrough;
-	reg [31:0] md_passthrough;
+	reg [31:0] mem_passthrough;
 	reg [31:0] rd_val_passthrough;
 
 	// to writeback
@@ -25,7 +25,7 @@ module memory_tb();
 	memory _memory(
 		.is_ld_op_passthrough(is_ld_op_passthrough),
 		.is_str_op_passthrough(is_str_op_passthrough),
-		.md_passthrough(md_passthrough),
+		.mem_passthrough(mem_passthrough),
 		.rd_val_passthrough(rd_val_passthrough),
 
 		.dmem_val_passthrough(dmem_val_passthrough),
@@ -51,7 +51,7 @@ module memory_tb();
 
 		// initialize
 		reset = 1;
-		md_passthrough = 0;
+		mem_passthrough = 0;
 		rd_val_passthrough = 0;
 		is_ld_op_passthrough = 0;
 		is_str_op_passthrough = 0;
@@ -64,7 +64,7 @@ module memory_tb();
 		is_ld_op_passthrough <= 0;
 		is_str_op_passthrough <= 1;
 		for (i = 0; i < 256; i = i + 1) begin
-			#1 md_passthrough <= i;
+			#1 mem_passthrough <= i;
 			   rd_val_passthrough <= i; // dmem_val_in
 		end
 
@@ -72,7 +72,7 @@ module memory_tb();
 		#1 is_ld_op_passthrough <= 1;
 		   is_str_op_passthrough <= 0;
 		for (i = 0; i < 256; i = i + 1) begin
-			#1 md_passthrough <= i; // dmem_val_passthrough
+			#1 mem_passthrough <= i; // dmem_val_passthrough
 		end
 
 		#1 $finish;

@@ -30,7 +30,7 @@ module signExtend_tb();
 			#1 in1 <= i; // out1
 		end
 
-		// md
+		// mem
 		for (i = 0; i < 256; i = i + 1) begin
 			#1 in2 <= i; // out2
 		end

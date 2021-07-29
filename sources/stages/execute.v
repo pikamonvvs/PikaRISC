@@ -14,7 +14,7 @@ module execute(
 	input [3:0] rt,
 	input [3:0] cond,
 	input [17:0] imm,
-	input [21:0] md,
+	input [21:0] mem,
 
 	// flags
 	input is_alu_op,
@@ -47,7 +47,7 @@ module execute(
 	// pass-through
 	output [3:0] rd_num_passthrough, // alu
 	output [31:0] rd_val_passthrough, // alu
-	output [31:0] md_passthrough,
+	output [31:0] mem_passthrough,
 	output is_alu_op_passthrough,
 	output is_cmp_op_passthrough,
 	output is_ld_op_passthrough,
@@ -56,7 +56,7 @@ module execute(
 
 	wire [31:0] val0, val1, val2;
 	wire [31:0] imm32;
-	wire [31:0] md32;
+	wire [31:0] mem32;
 	wire [3:0] nzcv;
 
 	// TODO: postition of operand differ according to instruction
@@ -77,8 +77,8 @@ module execute(
 		.out(imm32)
 	);
 	signExtendMd _signExtendMd(
-		.in(md),
-		.out(md32)
+		.in(mem),
+		.out(mem32)
 	);
 
 	// alu
@@ -108,11 +108,11 @@ module execute(
 		.taken(taken)
 	);
 
-	// taken(pcWrite, if is_jmp_op && taken ? pc<-{10'd0, md}), nzcv(cpsr to write, if is_cmp_op ? regWrite <- nzcv), result(regWrite, if is_alu_op ? regaddr[rd] <- result; regWEn <- 1)
+	// taken(pcWrite, if is_jmp_op && taken ? pc<-{10'd0, mem}), nzcv(cpsr to write, if is_cmp_op ? regWrite <- nzcv), result(regWrite, if is_alu_op ? regaddr[rd] <- result; regWEn <- 1)
 	assign rd_num_passthrough = rd;
 	assign rd_val_passthrough = val0;
-	assign md_passthrough = md32;
-	assign pc_rel = md32;
+	assign mem_passthrough = mem32;
+	assign pc_rel = mem32;
 	assign is_alu_op_passthrough = is_alu_op;
 	assign is_cmp_op_passthrough = is_cmp_op;
 	assign is_ld_op_passthrough = is_ld_op;

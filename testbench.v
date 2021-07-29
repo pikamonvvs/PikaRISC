@@ -85,7 +85,7 @@ module testbench();
 
 		// code injection
 		$readmemh("test.hex", buffer);
-		for (i = 0; i < 256; i = i + 1) begin
+		for (i = 0; i < 44; i = i + 1) begin
 			#1 test_imem_addr_reg = i;
 			test_imem_data_in_reg = buffer[i];
 		end

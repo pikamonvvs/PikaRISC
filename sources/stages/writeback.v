@@ -3,7 +3,7 @@
 
 module writeback(
 	input [3:0] rd_num_passthrough, // ld
-	input [31:0] md_passthrough, // ld, str
+	input [31:0] mem_passthrough, // ld, str
 	input [31:0] result, // alu
 	input [31:0] cpsr_passthrough,
 	input [31:0] dmem_val_passthrough, // to writeback

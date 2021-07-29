@@ -7,7 +7,7 @@ module writeback_tb();
 	reg reset;
 
 	reg [3:0] rd_num_passthrough;
-	reg [31:0] md_passthrough;
+	reg [31:0] mem_passthrough;
 	reg [31:0] result;
 	reg [31:0] cpsr_passthrough;
 	reg [31:0] dmem_val_passthrough;
@@ -43,7 +43,7 @@ module writeback_tb();
 
 	writeback _writeback(
 		.rd_num_passthrough(rd_num_passthrough),
-		.md_passthrough(md_passthrough),
+		.mem_passthrough(mem_passthrough),
 		.result(result),
 		.cpsr_passthrough(cpsr_passthrough),
 		.dmem_val_passthrough(dmem_val_passthrough),
@@ -91,7 +91,7 @@ module writeback_tb();
 		reset = 1;
 
 		rd_num_passthrough = 0;
-		md_passthrough = 0;
+		mem_passthrough = 0;
 		result = 0;
 		cpsr_passthrough = 0;
 		dmem_val_passthrough = 0;
