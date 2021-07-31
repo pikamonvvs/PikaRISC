@@ -64,8 +64,7 @@ module execute(
 	assign rt_num = (!is_src2_imm) ? rt : 0;
 //	assign val1 = rs_val;
 	assign val1 = (is_not_op && is_src2_imm) ? imm32 : rs_val; // not is an unary operator
-	assign val2 = (!is_src2_imm) ? rt_val : imm32;
-
+	assign val2 = (is_src2_imm) ? imm32 : rt_val;
 	assign rd_num = rd;		// need to pass for ld
 	assign val0 = rd_val;	// need to pass for str
 

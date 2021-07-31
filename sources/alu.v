@@ -11,6 +11,10 @@ module alu(
 	output reg [31:0] result // FIXME:
 	);
 
+	initial begin
+		result <= 0;
+	end
+
 	always @ (*) begin
 		if (is_alu_op) begin
 			case (aluop)

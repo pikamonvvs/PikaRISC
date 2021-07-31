@@ -33,7 +33,7 @@ module instrMem(
 	assign data_out = memory[addr[`IMEM_BITS-1:0]];
 
 `ifdef FOR_TEST
-	assign test_data_out = memory[test_addr];
+	assign test_data_out = memory[test_addr[`IMEM_BITS-1:0]];
 `endif
 
 endmodule // instrMem

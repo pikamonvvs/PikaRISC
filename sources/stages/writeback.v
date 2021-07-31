@@ -2,6 +2,8 @@
 `define __WRITEBACK_V__
 
 module writeback(
+	input clk,
+
 	input [3:0] rd_num_passthrough, // ld
 	input [31:0] mem_passthrough, // ld, str
 	input [31:0] result, // alu
@@ -22,7 +24,15 @@ module writeback(
 	output reg [31:0] cpsr_out
 	);
 
-	always @ (*) begin
+	initial begin
+		rd_num <= 0;
+		rd_write_en <= 0;
+		rd_val <= 0;
+		cpsr_write_en <= 0;
+		cpsr_out <= 0;
+	end
+
+	always @ (negedge clk) begin
 		// alu
 		if (is_alu_op_passthrough) begin
 			// write result to num

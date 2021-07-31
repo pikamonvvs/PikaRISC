@@ -34,7 +34,7 @@ module fetch(
 	end
 
 	assign imem_addr = pc_in;
-	assign instruction = {{imem_data[7:0], imem_data[15:8], imem_data[23:16], imem_data[31:24]}}; // to big endian
+	assign instruction = { imem_data[7:0], imem_data[15:8], imem_data[23:16], imem_data[31:24] }; // to big endian
 
 endmodule // fetch
 

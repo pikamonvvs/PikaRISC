@@ -64,6 +64,9 @@ module PikaRISC(
 	wire [31:0] pc_rel;
 
 	fetch _fetch(
+		.clk(clk),
+		.reset(reset),
+
 		.instruction(instruction),
 		.imem_addr(imem_addr),	//
 		.imem_data(imem_data),	//
@@ -172,6 +175,7 @@ module PikaRISC(
 	);
 
 	writeback _writeback(
+		.clk(clk),
 		.rd_num_passthrough(rd_num_passthrough),
 		.mem_passthrough(mem_passthrough),
 		.result(result),

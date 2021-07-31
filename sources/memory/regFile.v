@@ -55,7 +55,7 @@ module regFile(
 	end
 
 	// reset
-	always @ (*) begin
+	always @ (negedge reset) begin
 		if (!reset) begin
 			for (i = 0; i < 16; i = i + 1)
 				regs[i] <= 0;

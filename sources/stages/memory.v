@@ -19,6 +19,13 @@ module memory(
 	input [31:0] dmem_val_in
 	);
 
+	initial begin
+		dmem_val_passthrough <= 0;
+		dmem_addr <= 0;
+		dmem_write_en <= 0;
+		dmem_val_out <= 0;
+	end
+
 	always @ (*) begin
 		if (is_ld_op_passthrough) begin
 			dmem_addr <= mem_passthrough;

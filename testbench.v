@@ -25,6 +25,7 @@ module testbench();
 	integer i = 0;
 `endif
 
+
 	PikaRISC _PikaRISC(
 		.clk(clk),
 		.reset(reset),
@@ -63,14 +64,14 @@ module testbench();
 `endif
 
 	initial begin
-		// for gtkwave
+		// for simulation
 		$dumpfile("test.vcd");
 		$dumpvars(-1, _PikaRISC);
 		$dumpvars(-1, _instrMem);
 		$dumpvars(-1, _dataMem);
 
 		// initialize
-		clk = 0;
+		clk = 1;
 		reset = 1;
 
 		// reset
@@ -93,6 +94,7 @@ module testbench();
 
 		// start clock trigger
 		repeat (44) begin
+			#1 clk = ~clk;
 			#1 clk = ~clk;
 		end
 
