@@ -1,5 +1,4 @@
-
-# 1. PikaRISC
+# PikaRISC
 
 Verilog HDL을 이용하여 PIKA 아키텍처에 정의된 명령어를 수행하는 프로세서를 구현하였습니다. 
 
