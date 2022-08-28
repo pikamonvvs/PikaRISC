@@ -99,6 +99,8 @@ make
 
 그러면 자동으로 gtkwave가 실행되며, 시뮬레이션 결과를 볼 수 있습니다.
 
+![PikaRISC Simulation Result](https://github.com/pikamonvvs/PikaProject/blob/master/resources/Simulation%20Result.png)
+
 ## 6. Future works
 
 1. CALL, RET 동작 미구현
