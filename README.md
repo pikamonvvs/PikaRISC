@@ -54,6 +54,7 @@ cd PikaRISC
 
 그리고 아래의 방법으로 컴파일 및 시뮬레이션할 수 있습니다.
 
+```
 # 테스트벤치 빌드 및  시뮬레이션
 iverilog -I sources/ -DFOR_TEST -o test.vvp testbench.v
 vvp test.vvp
