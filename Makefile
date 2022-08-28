@@ -1,6 +1,7 @@
-test.vcd:	test.vvp
+all:	clean test.vcd
 	gtkwave test.vcd
-test.vvp:	testbench.v
+
+test.vcd:
 	iverilog -I sources/ -DFOR_TEST -o test.vvp testbench.v
 #	iverilog -I sources/ -o test.vvp testbench.v
 	vvp test.vvp
